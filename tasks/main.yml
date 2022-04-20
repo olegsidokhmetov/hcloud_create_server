@@ -1,0 +1,4 @@
+---
+
+- name: Creating new virtual server on hetzner cloud
+  import_tasks: create-server.yaml

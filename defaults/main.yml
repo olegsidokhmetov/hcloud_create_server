@@ -1,0 +1,40 @@
+---
+# defaults file for server-create
+
+token: rIXJG21SVs9MdkrykRzUBWSpUrf7JFm6OsTbzUCvKURwjdYMWBiVLiYDMv8gzBTk 
+
+#[ssh_key_Name] name of keys in hetzner. Cheking with command "hcloud ssh-key list"
+server:
+  - name: Miguel-ssh-hel1-dc2
+    server_type: cx11
+    os_image: ubuntu-20.04
+    server_labels: Name=SSH-server
+    server_location: hel1
+    ssh_key_Oleg: Oleg
+    ssh_key_Shrrah: Shrrah
+    ssh_key_Andy: Andy
+    ssh_key_Walter: Walter
+    ssh_key_Miguel: Miguel
+
+#Settings for sending email via gmail.com
+email:
+  - host: smtp.gmail.com
+    port: 587
+    username: kyryap@gmail.com
+    password: OlegS,10
+    to: Miguel Ángel Cedillo <miguel.cedillo@quersystem.com>
+    subject: New virtual server was created.
+
+#LIST of servers type INTEL
+cx11: 1vCPU | 2GB RAM | 20GB Disk space | 20TB Traffic
+cx21: 2vCPU | 4GB RAM | 40GB Disk space | 20TB Traffic
+cx31: 2vCPU | 8GB RAM | 80GB Disk space | 20TB Traffic
+cx41: 4vCPU | 16GB RAM | 160GB Disk space | 20TB Traffic
+cx51: 8vCPU | 32GB RAM | 240GB Disk space | 20TB Traffic
+
+#LIST of servers type AMD
+cpx11: 2vCPU | 2GB RAM | 40GB Disk space | 20TB Traffic
+cpx21: 3vCPU | 4GB RAM | 80GB Disk space | 20TB Traffic
+cpx31: 4vCPU | 8GB RAM | 160GB Disk space | 20TB Traffic
+cpx41: 8vCPU | 16GB RAM | 240GB Disk space | 20TB Traffic
+cpx51: 16vCPU | 32GB RAM | 320GB Disk space | 20TB Traffic

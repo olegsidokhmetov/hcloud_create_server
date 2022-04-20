@@ -1,0 +1,36 @@
+---
+
+- name: Create a basic server
+  hcloud_server:
+    api_token: "{{ token }}"
+    name: "{{ item.name }}"
+    server_type: "{{ item.server_type }}"
+    image: "{{ item.os_image }}"
+    labels: "{{ item.server_labels }}"
+    location: "{{ item.server_location }}"
+    ssh_keys:
+      - "{{ item.ssh_key_Miguel }}" #Name of key. Cheking with command  hcloud ssh-key list
+    state: present
+  register: server_info
+  with_items: "{{ server }}"
+
+- name: Display password and IP of new server
+  set_fact: 
+    access_password: Ip of server is - {{ server_info.results | map(attribute='hcloud_server') | map(attribute='ipv4_address') }} and password is - {{ server_info.results | map(attribute='root_password') }}
+
+- debug: 
+    var: access_password
+
+- name: Sending an e-mail using Gmail SMTP servers
+  community.general.mail:
+    host: "{{ item.host }}"
+    port: "{{ item.port }}"
+    username: "{{ item.username }}"
+    password: "{{ item.password }}"
+    to:
+    - "{{ item.to }}"
+#   - John Smith <other_user@gmail.com>
+    subject: "{{ item.subject }}"
+    body: Server has been successfully created. Properties of server - "{{ cx11 }}". Access data - "{{ access_password }}". If there is no password, use ssh keys. Use ssh -i /folder/mykeypair.pem username@ip_hostname
+  delegate_to: localhost
+  with_items: "{{ email }}"
